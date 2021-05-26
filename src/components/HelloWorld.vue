@@ -1,6 +1,11 @@
 <template>
   <h1>{{ msg }}</h1>
-
+  <p>Wow this is truly fast</p>
+  <p>Environment Variables</p>
+  <dl>
+    <dt>Meta:</dt>
+    <dd>{{ JSON.stringify(meta, null, 2) }}</dd>
+  </dl>
   <p>
     Recommended IDE setup:
     <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
@@ -35,36 +40,44 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
-export default defineComponent({
-  name: 'HelloWorld',
-  props: {
-    msg: {
-      type: String,
-      required: true
-    }
-  },
-  setup: () => {
-    const count = ref(0)
-    return { count }
-  }
-})
+  import { ref, defineComponent } from 'vue';
+
+  export default defineComponent({
+    name: 'HelloWorld',
+    props: {
+      msg: {
+        type: String,
+        required: true,
+      },
+    },
+    setup: () => {
+      const count = ref(0);
+      const meta = import.meta;
+      console.log(import.meta);
+
+      return { count, meta };
+    },
+  });
 </script>
 
-<style scoped>
-a {
-  color: #42b983;
-}
+<style scoped lang="scss">
+  a {
+    color: #42b983;
+  }
 
-label {
-  margin: 0 0.5em;
-  font-weight: bold;
-}
+  label {
+    margin: 0 0.5em;
+    font-weight: bold;
+  }
 
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
-}
+  code {
+    background-color: #eee;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: #304455;
+  }
+
+  dd {
+    @apply font-bold;
+  }
 </style>
